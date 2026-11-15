@@ -13,3 +13,5 @@ mlruns/
 /data/interim/*
 /data/processed/*
 /models/*
+mlflow.db
+mlartifacts/
