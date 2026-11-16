@@ -8,10 +8,10 @@ Metric: macro-F1, because 66% of reviews are positive.
 
 | Experiment | Val macro-F1 | Decision |
 | --- | --- | --- |
-| TF-IDF words (1-2 grams) + logistic regression | 0.672 | Baseline |
-| Added character n-grams | FILL IN | FILL IN |
+| TF-IDF words (1-2 grams) + logistic regression | 0.672 | Keep |
+| Added character n-grams | 0.677 | Reverted: gain of 0.005 is within noise, and the model is larger and slower |
 
-## Results on the test set (baseline model)
+## Results on the test set (final model)
 - Macro-F1 0.668, accuracy 0.83
 - Negative F1 0.81, positive F1 0.91, neutral F1 0.29
 

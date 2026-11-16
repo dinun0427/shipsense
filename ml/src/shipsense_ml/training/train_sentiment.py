@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, f1_score
-from sklearn.pipeline import make_pipeline, make_union
+from sklearn.pipeline import make_pipeline
 
 
 def main():
@@ -20,13 +20,8 @@ def main():
     print("rows:", len(train), len(val), len(test))
 
     pipe = make_pipeline(
-        make_union(
-            TfidfVectorizer(
-                ngram_range=(1, 2), min_df=3, sublinear_tf=True, lowercase=True
-            ),
-            TfidfVectorizer(
-                analyzer="char_wb", ngram_range=(2, 5), min_df=5, sublinear_tf=True
-            ),
+        TfidfVectorizer(
+            ngram_range=(1, 2), min_df=3, sublinear_tf=True, lowercase=True
         ),
         LogisticRegression(max_iter=2000, class_weight="balanced"),
     )
