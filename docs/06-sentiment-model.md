@@ -20,3 +20,10 @@ Metric: macro-F1, because 66% of reviews are positive.
 - Only 41% of orders have a review with text.
 - Star rating is a proxy for sentiment, so labels are noisy.
 - Brazilian Portuguese, 2016 to 2018 only.
+
+## Known weakness
+- "produto chegou muito atrasado" (arrived very late) is classified positive
+  (confidence 0.58). Words like "produto chegou" appear mostly in positive
+  reviews, and a bag-of-words model cannot read negation or meaning.
+- Possible upgrade: fine-tune a Portuguese transformer and compare on the
+  same test set.
