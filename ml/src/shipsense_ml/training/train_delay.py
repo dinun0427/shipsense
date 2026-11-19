@@ -121,17 +121,18 @@ def main():
         print("Baseline B (logistic regression): PR-AUC =", round(float(base_pr), 3))
         mlflow.log_metric("baseline_logreg_val_pr_auc", float(base_pr))
 
-        params = dict(
-            n_estimators=3000,
-            learning_rate=0.03,
-            num_leaves=8,
-            min_child_samples=200,
-            subsample=0.8,
-            subsample_freq=1,
-            colsample_bytree=0.8,
-            scale_pos_weight=(1 - prior) / prior,
-            random_state=42,
-        )
+        params = {
+            "n_estimators": 3000,
+            "learning_rate": 0.03,
+            "num_leaves": 8,
+            "min_child_samples": 200,
+            "subsample": 0.8,
+            "subsample_freq": 1,
+            "colsample_bytree": 0.8,
+            "scale_pos_weight": (1 - prior) / prior,
+            "random_state": 42,
+        }
+
         model = lgb.LGBMClassifier(**params)
         model.fit(
             X_tr,
@@ -146,7 +147,7 @@ def main():
 
         p_va = model.predict_proba(X_va)[:, 1]
         # Pick the highest threshold that still catches at least 60% of late orders.
-        prec, rec, thr = precision_recall_curve(y_va, p_va)
+        _prec, rec, thr = precision_recall_curve(y_va, p_va)
         ok = np.where(rec[:-1] >= 0.60)[0]
         threshold = float(thr[ok[-1]]) if len(ok) else 0.5
 
